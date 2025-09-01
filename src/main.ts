@@ -1,8 +1,12 @@
-import { createApp } from 'vue'
+import {
+  createApp
+} from 'vue'
 import App from './App.vue'
 import router from './router';
 
-import { IonicVue } from '@ionic/vue';
+import {
+  IonicVue
+} from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/vue/css/core.css';
@@ -34,10 +38,37 @@ import '@ionic/vue/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const app = createApp(App)
+// Importa las funciones de Firebase
+import {
+  initializeApp
+} from 'firebase/app';
+import {
+  getAuth
+} from 'firebase/auth';
+import {
+  getFirestore
+} from 'firebase/firestore';
+
+// Aquí va la configuración de tu proyecto de Firebase
+const firebaseConfig = {
+  apiKey: "Tu Api Key",
+  authDomain: "Tu Auth Domain",
+  projectId: "Tu Project ID",
+  storageBucket: "Tu Storage Bucket",
+  messagingSenderId: "Tu Messaging Sender ID",
+  appId: "Tu App ID"
+};
+
+// Inicializa Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+const application = createApp(App)
   .use(IonicVue)
   .use(router);
 
 router.isReady().then(() => {
-  app.mount('#app');
+  application.mount('#app');
 });
